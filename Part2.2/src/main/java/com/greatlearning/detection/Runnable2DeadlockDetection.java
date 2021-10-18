@@ -48,24 +48,24 @@ public class Runnable2DeadlockDetection implements Runnable{
     }
 
     private boolean tryLockBothLocks() {
-        String threadName = Thread.currentThread().getName();
-
-        System.out.println(threadName + " lock2: attempt lock");
-        boolean lock2Succeeded = this.lockGraphFacade.tryLock(this.lock2);
-        if(!lock2Succeeded) {
-            return false;
-        }
-        System.out.println(threadName + " lock2: locked");
-
-        sleep(1000);
+    	String threadName = Thread.currentThread().getName();
 
         System.out.println(threadName + " lock1: attempt lock");
         boolean lock1Succeeded = this.lockGraphFacade.tryLock(this.lock1);
         if(!lock1Succeeded) {
-            this.lockGraphFacade.unlock(lock2);
             return false;
         }
         System.out.println(threadName + " lock1: locked");
+
+        sleep(1000);
+
+        System.out.println(threadName + " lock2: attempt lock");
+        boolean lock2Succeeded = this.lockGraphFacade.tryLock(this.lock2);
+        if(!lock2Succeeded) {
+            this.lockGraphFacade.unlock(lock1);
+            return false;
+        }
+        System.out.println(threadName + " lock2: locked");
 
         return true;
     }

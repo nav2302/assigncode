@@ -40,9 +40,9 @@ public class LockGraphFacade {
 
         // Lock is locked by another thread, but is not part of a deadlock,
         // so it is safe to wait to lock the Lock at a later time.
-        lock.lock();
-        threadNode.waitingFor = null;
-        lockNode.lockedBy = threadNode;
+		/*
+		 * lock.lock(); threadNode.waitingFor = null; lockNode.lockedBy = threadNode;
+		 */
         return true;
     }
 

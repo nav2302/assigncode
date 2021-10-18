@@ -13,6 +13,8 @@ public class HeapDumpMemLeakChk {
 		for (int i = 0; i < 1000000; i++) {
 			leak.add(new ObjectForLeak());
 		}
+		
+		leak.clear();
 
 		System.out.println("Post Object creation to check Memory Leak");
 	}

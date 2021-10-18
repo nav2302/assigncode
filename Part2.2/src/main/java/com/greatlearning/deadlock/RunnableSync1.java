@@ -30,9 +30,9 @@ public class RunnableSync1 implements Runnable{
                 //do the work - now that both locks have been acquired (locked by this thread)
 
             }
-            System.out.println(threadName + " unlocking Lock 2");
+            System.out.println(threadName + " unlocking Lock 1");
 
         }
-        System.out.println(threadName + " unlocking Lock 1");
+        System.out.println(threadName + " unlocking Lock 2");
     }
 }

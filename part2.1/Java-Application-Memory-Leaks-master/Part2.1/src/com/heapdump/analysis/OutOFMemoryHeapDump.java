@@ -10,6 +10,11 @@ public class OutOFMemoryHeapDump {
 		
 		while(true) {
 			leak.add(new ObjectForLeak());
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -48,23 +48,25 @@ public class Runnable2TimeOut implements Runnable{
         String threadName = Thread.currentThread().getName();
 
         try {
-            boolean lock2Succeeded = lock2.tryLock(1000, TimeUnit.MILLISECONDS);
-            if(!lock2Succeeded) {
-                return false;
-            }
-        } catch (InterruptedException e) {
-            System.out.println(threadName + " interrupted trying to lock Lock 2");
-            return false;
-        }
-        try {
             boolean lock1Succeeded = lock1.tryLock(1000, TimeUnit.MILLISECONDS);
+            System.out.println("Inside Runnable 2 : Locking thread 1");
             if(!lock1Succeeded) {
-                lock2.unlock();
                 return false;
             }
         } catch (InterruptedException e) {
             System.out.println(threadName + " interrupted trying to lock Lock 1");
-            lock1.unlock();
+            return false;
+        }
+        try {
+            boolean lock2Succeeded = lock2.tryLock(1000, TimeUnit.MILLISECONDS);
+            System.out.println("Inside Runnable 2 : Locking thread 2");
+            if(!lock2Succeeded) {
+                lock1.unlock();
+                return false;
+            }
+        } catch (InterruptedException e) {
+            System.out.println(threadName + " interrupted trying to lock Lock 2");
+            lock2.unlock();
             return false;
         }
 

@@ -16,9 +16,9 @@ public class RunnableSync2 implements Runnable{
     public void run() {
         String threadName = Thread.currentThread().getName();
 
-        System.out.println(threadName + " attempting to lock Lock 2");
+        System.out.println(threadName + " attempting to lock Lock 1");
         synchronized(lock1) {
-            System.out.println(threadName + " locked Lock 2");
+            System.out.println(threadName + " locked Lock 1");
 
             try {
                 Thread.sleep(3000);
@@ -26,7 +26,7 @@ public class RunnableSync2 implements Runnable{
                 //ignore
             }
 
-            System.out.println(threadName + " attempting to lock Lock 1");
+            System.out.println(threadName + " attempting to lock Lock 2");
             synchronized (lock2) {
                 System.out.println(threadName + " locked Lock 2");
                 //do the work - now that both locks have been acquired (locked by this thread)

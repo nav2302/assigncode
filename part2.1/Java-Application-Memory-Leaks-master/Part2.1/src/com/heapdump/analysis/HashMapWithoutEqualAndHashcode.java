@@ -11,8 +11,10 @@ public class HashMapWithoutEqualAndHashcode {
 		while (true) {
 			map.put(new Key("key"), "value");
 			count++;
-			if(count > 100)
+			if(count > 100) {
 				Thread.sleep(1000000); // to allow GC do its job
+				break;
+			}
 		}
 	}
 }
